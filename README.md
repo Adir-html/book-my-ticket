@@ -1,176 +1,167 @@
-# Book My Ticket Hackathon
+# Book My Ticket
 
-A full-stack movie ticket booking app with:
-- Movie/showtime seat selection
-- JWT auth (signup/login)
-- Hold + confirm booking flow
-- My Bookings + cancel booking
-- Seat reset script for show turnover
+Book My Ticket is a modern, single-page and multi-view full-stack web application featuring movie browsing, showtime selection, interactive seat picking, temporary seat holding, and user booking management.
+
+The project is built using **HTML, CSS, JavaScript, Node.js, Express, and PostgreSQL**, providing a clean codebase for full-stack developers without complex framework overhead.
+
+This repository is especially suitable for **first-time open-source contributors**.
+
+---
+
+## About the Project
+
+The Book My Ticket platform brings essential movie-ticket browsing, real-time seat reservation, user authentication, and operational booking management into a clean, responsive web application workspace.
+
+### Current Features
+
+* **User Authentication** — Secure user registration and login powered by JSON Web Tokens (JWT) and bcrypt password hashing.
+* **Movie & Showtime Selection** — Browse movies and select available screening times and slots.
+* **Interactive Seat Selection** — Visual seat matrix for viewing seat availability, picking preferred seats, and tracking state selection.
+* **Temporary Seat Holding** — Real-time temporary seat reservation holding and release mechanism to prevent double-booking.
+* **Booking Management** — Instant booking confirmation, reservation cancellation, and personal booking history lookup views.
+* **Real-Time Communication** — Live seating updates and status synchronized across clients using Socket.IO.
+* **PostgreSQL Integration** — Reliable relational database integration for managing movies, showtimes, seat matrices, and user bookings.
+
+---
+
+## Tech Stack
+
+This project uses modern web & Node.js technologies:
+
+* **Frontend:** HTML5, CSS3, JavaScript (ES6+), Vite, Socket.IO Client
+* **Backend:** Node.js, Express.js, Socket.IO, JWT, bcrypt, dotenv
+* **Database:** PostgreSQL with custom SQL migration scripts
+* **Tools:** Git, GitHub, npm, VS Code, Docker Compose
 
 ---
 
 ## Project Structure
 
 ```text
-book-my-ticket-hackathon/
-├── backend/
-│   ├── config/
-│   │   └── db.mjs
-│   ├── controllers/
-│   │   ├── authController.mjs
-│   │   └── bookingController.mjs
-│   ├── database/
-│   │   └── schema.sql
-│   ├── middleware/
-│   │   └── authUser.mjs
-│   ├── routes/
-│   │   ├── authRoutes.mjs
-│   │   └── bookingRoutes.mjs
-│   ├── index.mjs
-│   ├── migrate.mjs
-│   ├── run-migration.mjs
-│   ├── reset-seats.mjs
-│   ├── package.json
-│   └── docker-compose.yml
-├── frontend/
-│   ├── public/
-│   │   └── assets/
-│   │       ├── bhootbangla.jpg
-│   │       ├── dacoit.webp
-│   │       ├── dhurandhar2.webp
-│   │       └── projecthailmary.jpg
-│   ├── index.html
-│   ├── main.js
-│   ├── vite.config.js
-│   └── package.json
-├── render.yaml
-└── README.md
+book-my-ticket/
+│
+├── backend/                    # Express REST API & Socket.IO server
+│   ├── config/                 # Database & environment configurations
+│   ├── controllers/            # Handlers for auth, seat layout, & bookings
+│   ├── database/               # PostgreSQL schema definitions & connection pool
+│   ├── middleware/             # JWT auth middleware & request validators
+│   ├── routes/                 # API route definitions
+│   ├── index.mjs               # Express application entry point & Socket.IO server
+│   ├── migrate.mjs             # Database migration execution script
+│   ├── reset-seats.mjs         # Utility script to reset seat reservation states
+│   ├── package.json            # Backend dependencies and scripts
+│   └── docker-compose.yml      # Local PostgreSQL Docker setup
+│
+├── frontend/                   # Vite client web application
+│   ├── public/                 # Static public assets
+│   │   └── assets/             # Images and app graphics
+│   ├── index.html              # Main ticket booking page
+│   ├── main.js                 # Client app controller, seat matrix, & Socket.IO client
+│   ├── vite.config.js          # Vite build tool configuration
+│   └── package.json            # Frontend dependencies and scripts
+│
+├── render.yaml                 # Cloud deployment blueprint configuration
+└── README.md                   # Open-source contributor guide
 ```
+
+You can start by installing backend/frontend dependencies (`npm install`) and launching the servers locally.
 
 ---
 
-## Prerequisites
+# Open Bugs
 
-- Node.js 18+
-- npm
-- PostgreSQL (local or hosted)
+These are existing problems in the project that contributors can help fix.
 
----
+| ID   | Issue                                                     | Difficulty   | Area                  |
+| ---- | --------------------------------------------------------- | ------------ | --------------------- |
+| B-01 | Improve frontend error handling and user feedback         | Beginner     | JavaScript / UI       |
+| B-02 | Improve seat-selection UI and visual states               | Beginner     | CSS / UI              |
+| B-03 | Improve authentication form validation                    | Beginner     | JavaScript / Auth     |
+| B-04 | Improve responsive design on smaller screens              | Beginner     | CSS / Responsive      |
+| B-05 | Improve real-time seat synchronization under heavy traffic | Intermediate | Socket.IO / Logic     |
+| B-06 | Improve booking transaction and error handling on rollback| Intermediate | Backend / PostgreSQL  |
+| B-07 | Add automated API and booking-flow tests                  | Intermediate | Node.js / Testing     |
+| B-08 | Improve API documentation and request payload examples    | Beginner     | Documentation         |
 
-## Environment Variables (Backend)
-
-Create `backend/.env` (or update existing):
-
-```env
-# Option 1: hosted DB
-DATABASE_URL=postgresql://user:password@host:5432/dbname
-
-# Option 2: local DB fields
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=your_password
-DB_NAME=booking_db
-
-# Auth
-JWT_SECRET=your_super_secret_key
-
-# Optional
-NODE_ENV=development
-PORT=8080
-```
+> Each bug has detailed information in the codebase to help you locate and solve the issue.
 
 ---
 
-## Setup & Run
+# Feature Ideas
 
-### 1) Install dependencies
+These features can be added to improve the application.
 
-```bash
-cd backend && npm install
-cd ../frontend && npm install
-```
+| ID   | Feature                                                | Difficulty   | Area                  |
+| ---- | ------------------------------------------------------ | ------------ | --------------------- |
+| F-01 | Movie search and filtering bar                         | Beginner     | JavaScript / UI       |
+| F-02 | Downloadable booking receipts with QR codes            | Intermediate | JavaScript / UI       |
+| F-03 | Email booking confirmation service integration         | Intermediate | Node.js / Backend     |
+| F-04 | Admin dashboard for movie, showtime, & seat management | Intermediate | Fullstack / API       |
+| F-05 | Online payment gateway integration                     | Advanced     | Fullstack / Payments  |
+| F-06 | Real-time booking analytics dashboard                  | Intermediate | Fullstack / Analytics |
+| F-07 | Accessibility (a11y) improvements & focus management   | Intermediate | HTML / Accessibility  |
+| F-08 | Automated CI/CD integration pipeline                   | Intermediate | DevOps / GitHub Actions |
 
-### 2) Run migration (create/seed tables)
-
-```bash
-cd backend
-node migrate.mjs
-```
-
-### 3) Start backend
-
-```bash
-cd backend
-npm start
-```
-
-### 4) Start frontend
-
-In a second terminal:
-
-```bash
-cd frontend
-npm run dev
-```
-
-Vite will print the local URL (usually `http://localhost:5173`).
+> Feature ideas are suggestions. Contributors can choose an idea that matches their skill level.
 
 ---
 
-## Useful Commands
+## Difficulty Guide
 
-### Reset all seats + clear bookings
+Not sure which issue to choose?
 
-```bash
-cd backend
-npm run reset:seats
-```
+### Beginner
 
-### Frontend production build
+Good starting point if this is your first contribution.
 
-```bash
-cd frontend
-npm run build
-npm run preview
-```
+Usually involves:
 
----
+* HTML structural changes and attribute fixes
+* CSS fixes, padding/margin cleanups, and responsive adjustments
+* Small JavaScript validation or UI feedback notices
+* Fixing API documentation or simple bug fixes
 
-## API Overview
+### Intermediate
 
-### Auth
-- `POST /auth/register`
-- `POST /auth/login`
+Requires some familiarity with JavaScript logic, APIs, Node.js, or SQL databases.
 
-### Seats
-- `GET /seats?movie=<movie>&time=<slot>`
+Usually involves:
 
-### Booking (protected)
-- `POST /book/hold/:id?movie=<movie>&time=<slot>`
-- `POST /book/release/:id?movie=<movie>&time=<slot>`
-- `POST /book/confirm?movie=<movie>&time=<slot>`
-- `GET /book/my-bookings`
-- `DELETE /book/cancel/:bookingId`
+* Connecting frontend endpoints with backend Express routes
+* Socket.IO real-time event handling and seat status synchronization
+* PostgreSQL database transactions and error handling
+* Building interactive UI modals and automated test suites
 
-### Legacy booking (no auth)
-- `PUT /book/legacy/:id/:name?movie=<movie>&time=<slot>`
+### Advanced
 
----
+Suitable for contributors who are comfortable working with larger parts of the application.
 
-## Screenshots / Demo Images
+Usually involves:
 
-
-![Auth Screen](./frontend/public/assets/auth.png)
-![Seat Selection](./frontend/public/assets/seats.png)
-![My Bookings](./frontend/public/assets/bookings.png)
-![Seat Holding](./frontend/public/assets/hold.png)
-
+* Full-stack payment gateway and third-party API integration
+* Real-time concurrency lock optimization under heavy traffic
+* Admin dashboard architecture with role-based authentication
+* CI/CD pipeline automation and production environment deployment
 
 ---
 
-## Notes
+## How to Contribute
 
-- Movie keys expected by backend: `dhurandhar`, `boothbangla`, `dacoit`, `hailmary`
-- Time slots: `9am`, `2pm`, `7pm`
-- Max 5 seats per user per movie+showtime (enforced in backend)
+If you find an issue you'd like to work on:
+
+1. Open the **Issues** section of this repository.
+2. Read the issue description carefully.
+3. Check whether someone is already working on it.
+4. Comment on the issue if you want to work on it.
+5. Fork the repository and make your changes.
+6. Test your changes locally.
+7. Create a Pull Request explaining what you changed.
+
+You don't need to be an experienced developer to contribute. Start with an issue that matches your current skill level and learn as you go.
+
+---
+
+
+Thank you for taking the time to contribute to Book My Ticket.
+
+Every contribution counts — whether it is a small CSS fix, a JavaScript improvement, documentation update, or a completely new feature.
